@@ -1,30 +1,33 @@
-+//feature 1 homework week 4
 
-let date = document.querySelector("#date");
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
-let now = new Date();
-now.getDay();
-
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
-let day = days[now.getDay()];
-let hours = now.getHours();
-if (hours < 10) {
-  hours = `0${hours}`;
-}
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  let day = days[date.getDay()];
+  return `${day} ${formatHours(timestamp)}`;
 }
 
-date.innerHTML = `${day} ${hours} : ${minutes}`;
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
 
 //feature 2- homework week 4
 
@@ -50,6 +53,7 @@ celsius.addEventListener("click", convertToCelsius);
 
 //homework week 5- Your task
 function showTemperature(response) {
+  console.log(response);
   let temperature = document.querySelector("#temperature");
   let temperatureRound = Math.round(response.data.main.temp);
   temperature.innerHTML = temperatureRound;
@@ -62,10 +66,17 @@ function showTemperature(response) {
   let wind = document.querySelector("#wind");
   let windRound = Math.round(response.data.wind.speed);
   wind.innerHTML = ` Wind: ${windRound} km/h`;
+
+   let dateElement = document.querySelector("#date");
+   dateElement.innerHTML=formatDate(response.data.dt * 1000);
+
+   let iconElement = document.querySelector("#icon");
+   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function searchCity(event) {
-  event.preventDefault();
+ event.preventDefault();
   let city = document.querySelector("#city");
   let typeCity = document.querySelector("#type-city");
   city.innerHTML = typeCity.value;

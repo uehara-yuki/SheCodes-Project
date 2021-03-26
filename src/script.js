@@ -1,18 +1,11 @@
-// Display current date
-function formatDate(timestamp){
-  let date = new Date(timestamp);
-  
-  let hours = date.getHours();
-  if (hours < 10) {
-  hours = `0${hours}`;
-}
++//feature 1 homework week 4
 
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-  minutes = `0${minutes}`;
-}
-  
-  let days = [
+let date = document.querySelector("#date");
+
+let now = new Date();
+now.getDay();
+
+let days = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -21,10 +14,19 @@ function formatDate(timestamp){
   "Friday",
   "Saturday"
 ];
-  let day = days[date.getDay()];
-  
-  return `${day} ${hours} : ${minutes}`;
+let day = days[now.getDay()];
+let hours = now.getHours();
+if (hours < 10) {
+  hours = `0${hours}`;
+}
+let minutes = now.getMinutes();
+if (minutes < 10) {
+  minutes = `0${minutes}`;
+}
 
+date.innerHTML = `${day} ${hours} : ${minutes}`;
+
+//feature 2- homework week 4
 
 //bonus feature- homework week 4
 
@@ -60,13 +62,6 @@ function showTemperature(response) {
   let wind = document.querySelector("#wind");
   let windRound = Math.round(response.data.wind.speed);
   wind.innerHTML = ` Wind: ${windRound} km/h`;
-
-  let weatherDescription= document.querySelector("#weather-description")
-  weatherDescription.innerHTML= response.data.weather[0].description;
-
-  let date = document.querySelector("#date");
-  date.innerHTML= formatDate(response.data.dt * 1000);
-
 }
 
 function searchCity(event) {
@@ -117,7 +112,6 @@ function showCityName(response) {
 
   let weatherDescription= document.querySelector("#weather-description")
   weatherDescription.innerHTML= response.data.weather[0].description;
-
 }
 
 function showCity(event) {

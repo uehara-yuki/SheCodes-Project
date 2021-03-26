@@ -29,7 +29,7 @@ function formatHours(timestamp) {
   return `${hours}:${minutes}`;
 }
 
-//display Temp/humid/wind/icon/date
+//display Temp/humid/wind/icon/date for the "Search button"
 function showTemperature(response) {
   
   let temperature = document.querySelector("#temperature");
@@ -44,12 +44,12 @@ function showTemperature(response) {
   let windRound = Math.round(response.data.wind.speed);
   wind.innerHTML = ` Wind: ${windRound} km/h`;
 
-   let dateElement = document.querySelector("#date");
-   dateElement.innerHTML=formatDate(response.data.dt * 1000);
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML=formatDate(response.data.dt * 1000);
 
-   let iconElement = document.querySelector("#icon");
-   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
-   iconElement.setAttribute("alt", response.data.weather[0].description);
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 
    
 }
@@ -83,9 +83,11 @@ function clickCurrentButton(position) {
   axios.get(apiurl).then(showCityName);
 }
 
+//display Temp/humid/wind/icon/date for the "Your location button"
 function showCityName(response) {
+  
   let currentLocation = response.data.name;
-  console.log(response.data);
+  
   let cityName = document.querySelector("#city");
   cityName.innerHTML = `${currentLocation}`;
 
@@ -103,6 +105,13 @@ function showCityName(response) {
 
   let weatherDescription= document.querySelector("#weather-description")
   weatherDescription.innerHTML= response.data.weather[0].description;
+  
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML=formatDate(response.data.dt * 1000);
 }
 
 function showCity(event) {

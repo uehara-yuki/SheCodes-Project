@@ -29,34 +29,12 @@ function formatHours(timestamp) {
   return `${hours}:${minutes}`;
 }
 
-//feature 2- homework week 4
-
-//bonus feature- homework week 4
-
-function convertToCelsius(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 19;
-}
-
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = 66;
-}
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", convertToFahrenheit);
-
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", convertToCelsius);
-
-//homework week 5- Your task
+//display Temp/humid/wind/icon/date
 function showTemperature(response) {
   console.log(response);
   let temperature = document.querySelector("#temperature");
-  let temperatureRound = Math.round(response.data.main.temp);
-  temperature.innerHTML = temperatureRound;
+  
+  temperature.innerHTML = Math.round(celsiusTemperature);
   console.log(response);
 
   let humidity = document.querySelector("#humidity");
@@ -73,8 +51,11 @@ function showTemperature(response) {
    let iconElement = document.querySelector("#icon");
    iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
    iconElement.setAttribute("alt", response.data.weather[0].description);
+
+   celsiusTemperature = response.data.main.temp;
 }
 
+//search city
 function searchCity(event) {
  event.preventDefault();
   let city = document.querySelector("#city");
@@ -92,7 +73,7 @@ searchForm.addEventListener("submit", searchCity);
 
 navigator.geolocation.getCurrentPosition(searchCity);
 
-//homework week 5- Bonus point
+//search current city
 
 function clickCurrentButton(position) {
   let latitude = position.coords.latitude;
@@ -132,3 +113,30 @@ function showCity(event) {
 let currentCity = document.querySelector("#current-button");
 currentCity.addEventListener("click", showCity); 
 
+
+//convert Celsius to F
+function convertToFahrenheit(event) {
+  event.preventDefault();
+
+  let temperature = document.querySelector("#temperature");
+  
+  celsius.classList.remove("active");
+  fahrenheit.classList.add("active");
+  
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperature.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function convertToCelsius(event) {
+  event.preventDefault();
+  celsius.classList.add("active");
+  fahrenheit.classList.remove("active");
+  let temperature = document.querySelector("#temperature");
+  temperature.innerHTML = Math.round(celsiusTemperature);
+}
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertToFahrenheit);
+
+let celsius = document.querySelector("#celsius");
+celsius.addEventListener("click", convertToCelsius);

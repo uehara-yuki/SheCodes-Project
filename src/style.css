@@ -44,3 +44,12 @@ line-height: 3;
 .searchButton {
   color: red;
 } 
+
+.temperature .active{
+  color: black;
+  cursor: default;
+  text-decoration: none;
+}
+.temperature .active:hover{
+  text-decoration: none;
+}

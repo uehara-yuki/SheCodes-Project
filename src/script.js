@@ -31,12 +31,11 @@ function formatHours(timestamp) {
 
 //display Temp/humid/wind/icon/date
 function showTemperature(response) {
-  console.log(response);
+  
   let temperature = document.querySelector("#temperature");
   celsiusTemperature = response.data.main.temp;
   temperature.innerHTML = Math.round(celsiusTemperature);
-  console.log(response);
-
+ 
   let humidity = document.querySelector("#humidity");
   let humidityRound = Math.round(response.data.main.humidity);
   humidity.innerHTML = ` Humidity: ${humidityRound} %`;
@@ -91,8 +90,8 @@ function showCityName(response) {
   cityName.innerHTML = `${currentLocation}`;
 
   let temperature = document.querySelector("#temperature");
-  let temperatureRound = Math.round(response.data.main.temp);
-  temperature.innerHTML = temperatureRound;
+  celsiusTemperature = response.data.main.temp;
+  temperature.innerHTML = Math.round(celsiusTemperature);
 
   let humidity = document.querySelector("#humidity");
   let humidityRound = Math.round(response.data.main.humidity);

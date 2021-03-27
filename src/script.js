@@ -51,7 +51,6 @@ function showTemperature(response) {
   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-   
 }
 
 //search city
@@ -65,6 +64,9 @@ function searchCity(event) {
   let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${typeCity.value}&units=metric&appid=${apiKey}`;
 
   axios.get(apiurl).then(showTemperature);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${typeCity.value}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 let searchForm = document.querySelector("#search-form");
@@ -81,6 +83,9 @@ function clickCurrentButton(position) {
   let apiurl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
 
   axios.get(apiurl).then(showCityName);
+  
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${typeCity.value}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 //display Temp/humid/wind/icon/date for the "Your location button"
@@ -112,6 +117,7 @@ function showCityName(response) {
 
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML=formatDate(response.data.dt * 1000);
+
 }
 
 function showCity(event) {
@@ -148,3 +154,27 @@ fahrenheit.addEventListener("click", convertToFahrenheit);
 
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", convertToCelsius);
+
+// display forecast
+
+function displayForecast(response){
+  
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+    <div class="col-2">
+                <h3>
+                    ${formatHours(forecast.dt * 1000)}
+                </h3>
+                <strong> 
+                ${Math.round(forecast.main.temp_max)}°C </strong>/${Math.round(forecast.main.temp_min)}°C
+                <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"/>
+    </div>
+    `
+    ;
+  }
+}

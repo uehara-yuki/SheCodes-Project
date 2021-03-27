@@ -1,4 +1,3 @@
-
 function formatDate(timestamp) {
   let date = new Date(timestamp);
 
@@ -27,30 +26,6 @@ function formatHours(timestamp) {
   }
 
   return `${hours}:${minutes}`;
-}
-
-//display Temp/humid/wind/icon/date for the "Search button"
-function showTemperature(response) {
-  
-  let temperature = document.querySelector("#temperature");
-  celsiusTemperature = response.data.main.temp;
-  temperature.innerHTML = Math.round(celsiusTemperature);
- 
-  let humidity = document.querySelector("#humidity");
-  let humidityRound = Math.round(response.data.main.humidity);
-  humidity.innerHTML = ` Humidity: ${humidityRound} %`;
-
-  let wind = document.querySelector("#wind");
-  let windRound = Math.round(response.data.wind.speed);
-  wind.innerHTML = ` Wind: ${windRound} km/h`;
-
-  let dateElement = document.querySelector("#date");
-  dateElement.innerHTML=formatDate(response.data.dt * 1000);
-
-  let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
-  iconElement.setAttribute("alt", response.data.weather[0].description);
-
 }
 
 //search city
@@ -84,8 +59,32 @@ function clickCurrentButton(position) {
 
   axios.get(apiurl).then(showCityName);
   
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${typeCity.value}&appid=${apiKey}&units=metric`;
+  apiurl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(displayForecast);
+}
+
+//display Temp/humid/wind/icon/date for the "Search button"
+function showTemperature(response) {
+  
+  let temperature = document.querySelector("#temperature");
+  celsiusTemperature = response.data.main.temp;
+  temperature.innerHTML = Math.round(celsiusTemperature);
+ 
+  let humidity = document.querySelector("#humidity");
+  let humidityRound = Math.round(response.data.main.humidity);
+  humidity.innerHTML = ` Humidity: ${humidityRound} %`;
+
+  let wind = document.querySelector("#wind");
+  let windRound = Math.round(response.data.wind.speed);
+  wind.innerHTML = ` Wind: ${windRound} km/h`;
+
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML=formatDate(response.data.dt * 1000);
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
 }
 
 //display Temp/humid/wind/icon/date for the "Your location button"

@@ -24,7 +24,7 @@ h3 {
   text-transform: capitalize;
 }
 .container {
-   background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
   border-radius: 10px;
   margin: auto;
   padding: 0 150px;
@@ -32,13 +32,16 @@ h3 {
   display: block;
   max-width: 900px;
 }
-.row-forecast {
+.forecast {
 font-size: 20px;
-margin: auto;
-text-align: center;
 }
 
 .row {
+  text-align: center;
+  padding: 20px;
+}
+
+.col-2{
   text-align: center;
 }
 

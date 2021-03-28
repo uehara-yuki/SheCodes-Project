@@ -47,7 +47,7 @@ function searchCity(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", searchCity);
 
-navigator.geolocation.getCurrentPosition(searchCity);
+navigator.geolocation.getCurrentPosition(clickCurrentButton);
 
 //search current city
 
@@ -165,13 +165,13 @@ function displayForecast(response){
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
-    <div class="col-2">
+    <div class="col">
                 <h3>
                     ${formatHours(forecast.dt * 1000)}
                 </h3>
                 <strong> 
                 ${Math.round(forecast.main.temp_max)}°C </strong>/${Math.round(forecast.main.temp_min)}°C
-                <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"/>
+                <img  class="w-100" src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"/>
     </div>
     `
     ;

@@ -13,23 +13,26 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <link rel="stylesheet" href="src/style.css" />
+
 </head>
 
 <body>
     <div class="container">
         <br />
+        <p><strong>Going for a walk with your dog? Check out the weather first!</strong> </p>
+        <br>
+        
         <h1>
             <form id="search-form">
                 <span class="typeCityButton">
                     <input type="text" placeholder=" Type the City" autofocus="on" autocomplete="off" id="type-city" />
                 </span>
                 <span class="searchButton">
-                    <input type="submit" value="Search" id="search-button" />
+                    <input type="submit" value="Search" id="search-button" class="btn btn-warning">
                 </span>
                 <span class="currentButton">
-                    <input type="submit" value="Your Location" id="current-button" />
+                    <input type="submit" value="Your Location" id="current-button" class="btn btn-warning"/>
                 </span>
             </form>
         </h1>

@@ -1,4 +1,5 @@
 function formatDate(timestamp) {
+
   let date = new Date(timestamp);
   let days = [
     "Sunday",
@@ -13,6 +14,7 @@ function formatDate(timestamp) {
   return `${day} ${formatHours(timestamp)}`;
 }
 function formatHours(timestamp) {
+  
   let date = new Date(timestamp);
   let hours = date.getHours();
   if (hours < 10) {
@@ -151,7 +153,7 @@ function displayForecast(response) {
   forecastElement.innerHTML = null;
 
   let forecast = null;
-  
+
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `

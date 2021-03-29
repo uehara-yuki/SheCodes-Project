@@ -1,13 +1,22 @@
 body {
+  background-image: url(../images/dog.jpg);
   font-family: "Slabo 27px", serif;
   margin: 32px;
   display: block;
+  color: White;
 }
 
-h1 {
+ h1 {
   font-size: 25px;
 }
 
+p{
+  font-size: 40px;
+  margin-bottom: 40px;
+  margin-top: -40px;
+}
+
+p,
 h1,
 h2,
 h3 {
@@ -24,11 +33,10 @@ h3 {
   text-transform: capitalize;
 }
 .container {
-  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+
   border-radius: 10px;
   margin: auto;
-  padding: 0 150px;
-  border-style: solid;
+  padding: 60px 140px;
   display: block;
   max-width: 900px;
 }
@@ -50,7 +58,7 @@ font-size: 20px;
 } 
 
 .temperature .active{
-  color: black;
+  color: orange;
   cursor: default;
   text-decoration: none;
 }
